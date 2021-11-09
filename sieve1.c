@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
    low_value = 3 + id * (n - 1) / p;
    high_value = 2 + (id + 1) * (n - 1) / p;
-   size = (high_value - low_value + 1)/2;
+   size = high_value - low_value + 1;
 
    /* Bail out if all the primes used for sieving are
       not all held by process 0 */
