@@ -47,9 +47,6 @@ int main(int argc, char *argv[]) {
    high_value = 1 + (id + 1) * (n - 1) / p;
    size = (high_value - low_value + 1)/2;
 
-   /* Bail out if all the primes used for sieving are
-      not all held by process 0 */
-
    proc0_size = (n - 1) / p;
 
    if ((2 + proc0_size) < (int) sqrt((double) n)) {
@@ -57,8 +54,6 @@ int main(int argc, char *argv[]) {
       MPI_Finalize();
       exit(1);
    }
-
-   /* Allocate this process's share of the array. */
 
    marked = (char *) malloc(size);
 
@@ -78,9 +73,9 @@ int main(int argc, char *argv[]) {
          if (!(low_value % prime)) first = 0;
          else first = prime - (low_value % prime);
       }
-      for (i = first; i < (size*2); i += prime) marked[i] = 1;
+      for (i = first; i < size; i += prime) marked[i] = 1;
       if (!id) {
-         while (marked[++index]);
+         while (marked[(++index)+1]);
          prime = index + 2;
       }
       if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
