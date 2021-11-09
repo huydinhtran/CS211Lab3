@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
       last array elements */
 
    low_value = 3 + id * (n - 1) / p;
-   high_value = 2 + (id + 1) * (n - 1) / p;
+   high_value = 3 + (id + 1) * (n - 1) / p;
    size = high_value - low_value + 1;
 
    /* Bail out if all the primes used for sieving are
