@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
    low_value = 2 + id * (n - 1) / p;
    high_value = 1 + (id + 1) * (n - 1) / p;
-   size = (high_value - low_value + 1)/2;
+   size = high_value - low_value + 1;
 
    proc0_size = (n - 1) / p;
 
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
       exit(1);
    }
 
-   for (i = 0; i < size; i++) marked[2*i+1] = 0;
+   for (i = 1; i < size; i+=2) marked[i] = 0;
    if (!id) index = 0;
    prime = 2;
    do {
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
       if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
    } while (prime * prime <= n);
    count = 0;
-   for (i = 0; i < size; i++)
+   for (i = 1; i < size; i+=2)
       if (!marked[i]) count++;
    if (p > 1)
       MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM,
