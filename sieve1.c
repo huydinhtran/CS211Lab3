@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
       exit(1);
    }
 
-   for (i = 0; i < size; i++) marked[i] = 0;
+   for (i = 0; i < size; i++) marked[i+1] = 0;
    if (!id) index = 0;
    prime = 2;
    do {
@@ -78,9 +78,9 @@ int main(int argc, char *argv[]) {
          if (!(low_value % prime)) first = 0;
          else first = prime - (low_value % prime);
       }
-      for (i = first; i < size; i += prime) marked[i] = 1;
+      for (i = first; i < (size*2); i += prime) marked[i] = 1;
       if (!id) {
-         while (marked[++index]);
+         while (marked[(++index)+1]);
          prime = index + 2;
       }
       if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
