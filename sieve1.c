@@ -70,8 +70,9 @@ int main(int argc, char *argv[]) {
       if (prime * prime > low_value)
          first = prime * prime;
       else {
-         if ((low_value % prime)%2==1) first = (prime-low_value%prime)/2;
-         else first = (2*prime-low_value%prime)/2;
+         if (!(low_value % prime)) first = 0;
+         else if ((low_value % prime)%2 == 1) first =  (prime - low_value % prime)/2;
+         else first =  (2*prime - low_value % prime)/2;
       }
       for (i = first; i < size; i += prime) marked[i] = 1;
       if (!id) {
