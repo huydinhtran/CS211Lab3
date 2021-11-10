@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
    low_value  = 2 * id * ((n-1)/2) / p + 3;
    high_value = 2 * (id+1) * ((n-1)/2) / p + 1;
-   size = (high_value - low_value + 1)/2;
+   size = (high_value - low_value)/2+1;
 
    proc0_size = (n - 1) / p;
 
