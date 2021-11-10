@@ -43,8 +43,8 @@ int main(int argc, char *argv[]) {
       well as the integers represented by the first and
       last array elements */
 
-   low_value = 3 + id * (n - 1) / p;
-   high_value = 3 + (id + 1) * (n - 1) / p;
+   low_value = 3 + id * (n - 1) / p / 2;
+   high_value = 3 + (id + 1) * (n - 1) / p / 2;
    size = (high_value - low_value + 1)/2;
 
    proc0_size = (n - 1) / p;
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
       exit(1);
    }
 
-   for (i = 0; i < size; i+=2) marked[i] = 0;
+   for (i = 0; i < size; i++) marked[i] = 0;
    if (!id) index = 0;
    prime = 2;
    do {
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
       if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
    } while (prime * prime <= n);
    count = 0;
-   for (i = 0; i < size; i+=2)
+   for (i = 0; i < size; i++)
       if (!marked[i]) count++;
    if (p > 1)
       MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM,
