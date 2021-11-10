@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
       last array elements */
 
    low_value = 3 + id * (n - 1) / p / 2;
-   high_value = 3 + (id + 1) * (n - 1) / p / 2;
+   high_value = 3 + (id + 1) * (n - 1) / p - 1;
    size = high_value - low_value;
 
    proc0_size = (n - 1) / p;
