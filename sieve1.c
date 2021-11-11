@@ -22,9 +22,6 @@ int main(int argc, char *argv[]) {
    unsigned long int proc0_size;   /* Size of proc 0's subarray */
    unsigned long int prime;        /* Current prime */
    unsigned long int size;         /* Elements in 'marked' */
-   int m;
-   int low_index;
-   int high_index;
 
    MPI_Init(&argc, &argv);
 
@@ -46,12 +43,8 @@ int main(int argc, char *argv[]) {
    /* Figure out this process's share of the array, as
       well as the integers represented by the first and
       last array elements */
-   m = (n-1) / 2;
-   low_index  = id * m / p;
-   high_index = (id+1) * m / p - 1;
-
-   low_value  = 2 * low_index + 3;
-   high_value = 2 * high_index + 3;
+   low_value  = 2 * id     * ((n-1)/2) / p + 3;
+   high_value = 2 * (id+1) * ((n-1)/2) / p + 2;
    size = (high_value - low_value)/2 + 1;
 
    proc0_size = (n - 1) / p;
