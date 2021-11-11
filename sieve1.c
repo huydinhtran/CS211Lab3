@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
       else {         
          if (!(low_value % prime)) first = 0;                  
          else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;         
-         else first =  (2*prime - (low_value % prime))/2;
+         else if ((low_value % prime)%2 == 0) first =  (2*prime - (low_value % prime))/2;
       }
       for (i = first; i < size; i += prime) marked[i] = 1;
       if (!id) {
