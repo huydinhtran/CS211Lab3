@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
    unsigned long int count;        /* Local prime count */
    double elapsed_time; /* Parallel execution time */
    unsigned long int first;        /* Index of first multiple */
-   unsigned long int global_count = 0; /* Global prime count */
+   unsigned long int global_count = 1; /* Global prime count */
    unsigned long long int high_value;   /* Highest value on this proc */
    unsigned long int i;
    int id;           /* Process ID number */
@@ -43,22 +43,19 @@ int main(int argc, char *argv[]) {
    /* Figure out this process's share of the array, as
       well as the integers represented by the first and
       last array elements */
-   low_value  = 2 * id     * ((n-1)/2) / p + 3;
-   high_value = 2 * (id+1) * ((n-1)/2) / p + 2;
+   int m = (n-1)/2;
+   int low_index = id*m/p;
+   int high_index = (id+1)*m/p-1;
+   low_value  = 2 * low_index + 3;
+   high_value = 2 * high_index + 3;
    size = (high_value - low_value)/2 + 1;
 
    proc0_size = (n - 1) / p;
 
-   if ((2 + proc0_size) < (int) sqrt((double) n)) {
+   if (high_value < (int) sqrt((double) n)) {
       if (!id) printf("Too many processes\n");
       MPI_Finalize();
       exit(1);
-   }
-
-   if (high_value < (int) sqrt((double) n)){
-      if (p==0) printf("Too many processes\n");       
-      MPI_Finalize();     
-      exit(1); 
    }
 
    marked = (char *) malloc(size);
