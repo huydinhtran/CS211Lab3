@@ -55,6 +55,13 @@ int main(int argc, char *argv[]) {
       exit(1);
    }
 
+   if (p==0){
+      if (high_value < (int) sqrt((double) n)){        
+         MPI_Finalize();     
+         exit(1); 
+      }
+   }
+
    marked = (char *) malloc(size);
 
    if (marked == NULL) {
