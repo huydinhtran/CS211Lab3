@@ -1,11 +1,3 @@
-/*
- *   Sieve of Eratosthenes
- *
- *   Programmed by Michael J. Quinn
- *
- *   Last modification: 7 September 2001
- */
-
 #include "mpi.h"
 #include <math.h>
 #include <stdio.h>
@@ -76,7 +68,7 @@ int main (int argc, char *argv[])
    }
   
    int sqrt_n = sqrt(n);
-   local_prime_marked = (char*)calloc(sqrt_n + 1, 1);
+   local_prime_marked = (char*)malloc(sqrt_n + 1, 1);
    for (i = 2; i <= sqrt_n; i += 2){
       local_prime_marked[i] = 1;
    } 
@@ -87,7 +79,7 @@ int main (int argc, char *argv[])
       local_prime_marked[i] = 1;
       }
    }
-   
+
    marked = (char *) malloc(size);
 
    if (marked == NULL) {
