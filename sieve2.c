@@ -83,7 +83,7 @@ int main (int argc, char *argv[])
       exit(1);
    }
    
-   sqrt_n = sqrt(n);
+   int sqrt_n = sqrt(n);
    local_prime_marked = (char*)calloc(sqrt_n + 1, 1);
    for (i = 2; i <= sqrt_n; i += 2){
       local_prime_marked[i] = 1;
