@@ -80,7 +80,7 @@ int main (int argc, char *argv[])
       }
    }
 
-   marked = (char *) calloc(size);
+   marked = (char *) malloc(size);
 
    if (marked == NULL) {
       printf("Cannot allocate enough memory\n");
