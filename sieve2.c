@@ -74,15 +74,7 @@ int main (int argc, char *argv[])
       MPI_Finalize();
       exit(1);
    }
-
-   marked = (char *) malloc(size);
-
-   if (marked == NULL) {
-      printf("Cannot allocate enough memory\n");
-      MPI_Finalize();
-      exit(1);
-   }
-   
+  
    int sqrt_n = sqrt(n);
    local_prime_marked = (char*)calloc(sqrt_n + 1, 1);
    for (i = 2; i <= sqrt_n; i += 2){
@@ -95,6 +87,15 @@ int main (int argc, char *argv[])
       local_prime_marked[i] = 1;
       }
    }
+   
+   marked = (char *) malloc(size);
+
+   if (marked == NULL) {
+      printf("Cannot allocate enough memory\n");
+      MPI_Finalize();
+      exit(1);
+   }
+ 
 
    for (i = 0; i < size; i++) marked[i] = 0;
    if (!id) index = 0;  
