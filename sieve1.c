@@ -43,11 +43,11 @@ int main(int argc, char *argv[]) {
    /* Figure out this process's share of the array, as
       well as the integers represented by the first and
       last array elements */
-   int m = (n-1)/2;
-   int low_index = id*m/p;
-   int high_index = (id+1)*m/p-1;
-   low_value  = 2 * low_index + 3;
-   high_value = 2 * high_index + 3;
+//    int m = (n-1)/2;
+//    int low_index = id*m/p;
+//    int high_index = (id+1)*m/p-1;
+   low_value  = 2* id*((n-1)/2)/p+3;
+   high_value = 2*(id+1)*((n-1)/2)/p+1;
    size = (high_value - low_value)/2 + 1;
 
    proc0_size = (n - 1) / p;
