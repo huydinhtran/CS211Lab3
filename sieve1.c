@@ -55,11 +55,10 @@ int main(int argc, char *argv[]) {
       exit(1);
    }
 
-   if (p==0){
-      if (high_value < (int) sqrt((double) n)){        
-         MPI_Finalize();     
-         exit(1); 
-      }
+   if (high_value < (int) sqrt((double) n)){
+      if (p==0) printf("Too many processes\n");       
+      MPI_Finalize();     
+      exit(1); 
    }
 
    marked = (char *) malloc(size);
