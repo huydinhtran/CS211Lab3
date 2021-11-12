@@ -43,53 +43,54 @@ int main(int argc, char *argv[]) {
    /* Figure out this process's share of the array, as
       well as the integers represented by the first and
       last array elements */
-//    int m = (n-1)/2;
-//    int low_index = id*m/p;
-//    int high_index = (id+1)*m/p-1;
-   low_value  = 2* id*((n-1)/2)/p+3;
-   high_value = 2*(id+1)*((n-1)/2)/p+1;
+   int m = (n-1)/2;
+   int low_index  = id * m / p;
+   int high_index = (id+1) * m / p - 1;
+   low_value  = 2 * low_index + 3;
+   high_value = 2 * high_index + 3;
    size = (high_value - low_value)/2 + 1;
+   printf("%d",low_value);
+   printf("%d",high_value);
+   // proc0_size = (n - 1) / p;
 
-   proc0_size = (n - 1) / p;
+   // if (high_value < (int) sqrt((double) n)) {
+   //    if (!id) printf("Too many processes\n");
+   //    MPI_Finalize();
+   //    exit(1);
+   // }
 
-   if (high_value < (int) sqrt((double) n)) {
-      if (!id) printf("Too many processes\n");
-      MPI_Finalize();
-      exit(1);
-   }
+   // marked = (char *) malloc(size);
 
-   marked = (char *) malloc(size);
+   // if (marked == NULL) {
+   //    printf("Cannot allocate enough memory\n");
+   //    MPI_Finalize();
+   //    exit(1);
+   // }
 
-   if (marked == NULL) {
-      printf("Cannot allocate enough memory\n");
-      MPI_Finalize();
-      exit(1);
-   }
-
-   for (i = 0; i < size; i++) marked[i] = 0;
-   if (!id) index = 0;  
-   prime = 3;
-   do {
-      if (prime * prime > low_value)
-         first = (prime * prime - low_value)/2;
-      else {         
-         if (!(low_value % prime)) first = 0;                  
-         else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
-         else first =  (2*prime - (low_value % prime))/2;
-      }
-      for (i = first; i < size; i += prime) marked[i] = 1;
-      if (!id) {
-         while (marked[++index]);
-         prime = index*2 + 3;
-      }
-      if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
-   } while (prime * prime <= n);
-   count = 0;
-   for (i = 0; i < size; i++)
-      if (!marked[i]) count++;
-   if (p > 1)
-      MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM,
-                  0, MPI_COMM_WORLD);
+   // for (i = 0; i < size; i++) marked[i] = 0;
+   // if (!id) index = 0;  
+   // prime = 3;
+   // do {
+   //    if (prime * prime > low_value)
+   //       first = (prime * prime - low_value)/2;
+   //    else {         
+   //       if (!(low_value % prime)) first = 0;                  
+   //       else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
+   //       else first =  (2*prime - (low_value % prime))/2;
+   //    }
+   //    for (i = first; i < size; i += prime) marked[i] = 1;
+   //    if (!id) {
+   //       while (marked[++index]);
+   //       prime = index*2 + 3;
+   //    }
+   //    if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
+   // } while (prime * prime <= n);
+   // count = 0;
+   // for (i = 0; i < size; i++)
+   //    if (!marked[i]) count++;
+   // if (p > 1)
+   //    MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM,
+   //                0, MPI_COMM_WORLD);
 
    /* Stop the timer */
 
