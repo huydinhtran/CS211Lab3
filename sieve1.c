@@ -49,9 +49,9 @@ int main(int argc, char *argv[]) {
    low_value  = 2 * low_index + 3;
    high_value = 2 * high_index + 3;
    size = (high_value - low_value)/2 + 1;
-   printf("%d\n",id);
-   printf("%d\n",low_value);
-   printf("%d\n",high_value);
+   printf("Id %d\n",id);
+   printf("Low value %d\n",low_value);
+   printf("High value %d\n",high_value);
    // proc0_size = (n - 1) / p;
 
    // if (high_value < (int) sqrt((double) n)) {
