@@ -81,18 +81,18 @@ int main (int argc, char *argv[])
    } 
    do {
       if (prime * prime > low_value)
-         local_first = (prime * prime - low_value)/2;
-      else {         
-         if (!(low_value % prime)) local_first = 0;                  
-         else if ((low_value % prime)%2 == 1) local_first = (prime - (low_value % prime))/2;     
-         else local_first =  (2*prime - (low_value % prime))/2;
+         first = prime * prime - low_value;
+      else {
+         if (!(low_value % prime)) first = 0;
+         else first = prime - (low_value % prime);
       }
-      for (i = local_first; i < local_prime_size; i += prime) local_prime_marked[i] = 1;
+      for (i = first; i < size; i += prime) marked[i] = 1;
       if (!id) {
-         while (local_prime_marked[++index]);
-         prime = index*2 + 3;
+         while (marked[++index]);
+         prime = index + 2;
       }
-   } while (prime * prime <= local_prime_size);
+      if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
+   } while (prime * prime <= n);
 /////////////////////////////Sieve1//////////////////////////////////////////////////////////////
    marked = (char *) malloc(size);
 
