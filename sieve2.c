@@ -76,9 +76,9 @@ int main (int argc, char *argv[])
    index = 0;
    prime = 3;
 
-   for (i = 0; i < sqrt(n); i++) local_prime_marked[i] = 0;
+   for (i = 0; i < local_prime_size; i++) local_prime_marked[i] = 0;
 
-   for (i = 2; i <= sqrt(n); i += 2){
+   for (i = 2; i <= local_prime_size; i += 2){
       local_prime_marked[i] = 1;
    } 
    do {
@@ -88,7 +88,7 @@ int main (int argc, char *argv[])
          if (!(low_value % prime)) local_first = 0;
          else local_first = prime - (low_value % prime);
       }
-      for (i = local_first; i < sqrt(n); i += prime) local_prime_marked[i] = 1;
+      for (i = local_first; i < local_prime_size; i += prime) local_prime_marked[i] = 1;
       if (!id) {
          while (local_prime_marked[++index]);
          prime = index + 2;
