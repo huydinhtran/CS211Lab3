@@ -68,8 +68,8 @@ int main (int argc, char *argv[])
       exit(1);
    }
 /////////////////////////////////////////////////////////////////////////////////////////// 
-   local_prime_marked = (char*)calloc(sqrt_n + 1, 1);
    local_prime_size = sqrt(n);
+   local_prime_marked = (char*)calloc(local_prime_size + 1, 1);
    local_first = 0;
    for (i = 2; i <= local_prime_size; i += 2){
       local_prime_marked[i] = 1;
