@@ -74,11 +74,11 @@ int main (int argc, char *argv[])
       local_prime_marked[i] = 1;
    } 
 
-   for (prime = 3; prime <= sqrt_n; prime += 2){
+   for (prime = 3; prime <= sqrt(n); prime += 2){
       if (local_prime_marked[prime] == 1)
          continue;
 
-      for (i = prime << 1; i <= sqrt_n; i += prime){
+      for (i = prime << 1; i <= sqrt(n); i += prime){
          local_prime_marked[i] = 1;
       }
    } /* for */
