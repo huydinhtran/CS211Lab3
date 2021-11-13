@@ -68,7 +68,7 @@ int main (int argc, char *argv[])
       exit(1);
    }
 /////////////////////////////Sieve2////////////////////////////////////////////////////////////// 
-   local_prime_marked = (char*)malloc(sqrt(n));
+   local_prime_marked = (char*)calloc(sqrt(n));
 
    for (i = 2; i <= sqrt(n); i += prime){
       local_prime_marked[i] = 1;
@@ -78,7 +78,7 @@ int main (int argc, char *argv[])
       if (local_prime_marked[prime] == 1)
          continue;
 
-      for (i = prime * 2; i <= sqrt(n); i += prime){
+      for (i = prime; i <= sqrt(n); i += prime){
          local_prime_marked[i] = 1;
       }
    } 
