@@ -76,9 +76,9 @@ int main (int argc, char *argv[])
    index = 0;
    prime = 3;
 
-   for (i = 0; i < local_prime_size; i++) local_prime_marked[i] = 0;
+   for (i = 0; i < sqrt(n); i++) local_prime_marked[i] = 0;
 
-   for (i = 2; i <= local_prime_size; i += 2){
+   for (i = 2; i <= sqrt(n); i += 2){
       local_prime_marked[i] = 1;
    } 
    do {
