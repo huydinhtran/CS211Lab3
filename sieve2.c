@@ -68,7 +68,9 @@ int main (int argc, char *argv[])
       exit(1);
    }
 /////////////////////////////Sieve2////////////////////////////////////////////////////////////// 
-   local_prime_size = sqrt(n);
+   local_low_value = 2 + id * sqrt(n - 1) / p;
+   local_high_value = 1 + (id + 1) * sqrt(n - 1) / p;
+   local_prime_size = high_value - low_value + 1;;
    local_prime_marked = (char*)calloc(local_prime_size + 1, 1);
    local_first = 0;
    index = 0;
@@ -86,12 +88,12 @@ int main (int argc, char *argv[])
          if (!(low_value % prime)) local_first = 0;
          else local_first = prime - (low_value % prime);
       }
-      for (i = first; i < local_prime_size; i += prime) local_prime_marked[i] = 1;
+      for (i = local_first; i < sqrt(n); i += prime) local_prime_marked[i] = 1;
       if (!id) {
          while (local_prime_marked[++index]);
          prime = index + 2;
       }
-   } while (prime * prime <= n);
+   } while (prime * prime <= sqrt(n));
 /////////////////////////////Sieve1//////////////////////////////////////////////////////////////
    marked = (char *) malloc(size);
 
