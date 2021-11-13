@@ -80,7 +80,7 @@ int main (int argc, char *argv[])
       }
    }
 
-   marked = (char *) calloc(size * sizeof(char), 1);
+   marked = (char *) malloc(size);
 
    if (marked == NULL) {
       printf("Cannot allocate enough memory\n");
@@ -105,14 +105,14 @@ int main (int argc, char *argv[])
          while (marked[++index]);
          prime = index*2 + 3;
       }
-      if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
+      // if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
    } while (prime * prime <= n);
    count = 0;
    for (i = 0; i < size; i++)
       if (!marked[i]) count++;
-   // if (p > 1)
-   //    MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM,
-   //                0, MPI_COMM_WORLD);
+   if (p > 1)
+      MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM,
+                  0, MPI_COMM_WORLD);
 
    /* Stop the timer */
 
