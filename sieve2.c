@@ -68,20 +68,20 @@ int main (int argc, char *argv[])
       exit(1);
    }
 /////////////////////////////Sieve2////////////////////////////////////////////////////////////// 
-   // local_prime_marked = (char*)calloc(local_prime_size +1,1);
+   local_prime_marked = (char*)malloc(sqrt(n));
 
-   // for (i = 0; i <= sqrt(n); i += prime){
-   //    local_prime_marked[i] = 1;
-   // } 
+   for (i = 2; i <= sqrt(n); i += prime){
+      local_prime_marked[i] = 1;
+   } 
 
-   // for (prime = 3; prime <= sqrt(n); prime += 2){
-   //    if (local_prime_marked[prime] == 1)
-   //       continue;
+   for (prime = 3; prime <= sqrt(n); prime += 2){
+      if (local_prime_marked[prime] == 1)
+         continue;
 
-   //    for (i = prime * 2; i <= sqrt(n); i += prime){
-   //       local_prime_marked[i] = 1;
-   //    }
-   // } 
+      for (i = prime * 2; i <= sqrt(n); i += prime){
+         local_prime_marked[i] = 1;
+      }
+   } 
 
 /////////////////////////////Sieve1//////////////////////////////////////////////////////////////
    marked = (char *) malloc(size);
