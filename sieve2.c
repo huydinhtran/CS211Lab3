@@ -71,7 +71,7 @@ int main (int argc, char *argv[])
    unsigned long long int local_low_value = 2 + id * sqrt(n - 1) / p;
    unsigned long long int local_high_value = 1 + (id + 1) * sqrt(n - 1) / p;
    local_prime_size = local_high_value - local_low_value + 1;;
-   local_prime_marked = (char*)calloc(local_prime_size + 1, 1);
+   local_prime_marked = (char*)malloc(local_prime_size);
    local_first = 0;
    index = 0;
    prime = 2;
