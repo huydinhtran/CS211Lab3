@@ -82,9 +82,9 @@ int main (int argc, char *argv[])
          else if ((low_value % prime)%2 == 1) local_first = (prime - (low_value % prime))/2;     
          else local_first =  (2*prime - (low_value % prime))/2;
       }
-      for (i = local_first; i < local_prime_size; i += prime) marked[i] = 1;
+      for (i = local_first; i < local_prime_size; i += prime) local_prime_marked[i] = 1;
       if (!id) {
-         while (marked[++index]);
+         while (local_prime_marked[++index]);
          prime = index*2 + 3;
       }
    } while (prime * prime <= local_prime_size);
