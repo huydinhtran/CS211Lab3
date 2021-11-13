@@ -70,7 +70,7 @@ int main (int argc, char *argv[])
 /////////////////////////////Sieve2////////////////////////////////////////////////////////////// 
    unsigned long long int local_low_value = 2 + id * sqrt(n - 1) / p;
    unsigned long long int local_high_value = 1 + (id + 1) * sqrt(n - 1) / p;
-   local_prime_size = high_value - low_value + 1;;
+   local_prime_size = local_high_value - local_low_value + 1;;
    local_prime_marked = (char*)calloc(local_prime_size + 1, 1);
    local_first = 0;
    index = 0;
@@ -82,11 +82,11 @@ int main (int argc, char *argv[])
       local_prime_marked[i] = 1;
    } 
    do {
-      if (prime * prime > low_value)
-         local_first = prime * prime - low_value;
+      if (prime * prime > local_low_value)
+         local_first = prime * prime - local_low_value;
       else {
-         if (!(low_value % prime)) local_first = 0;
-         else local_first = prime - (low_value % prime);
+         if (!(local_low_value % prime)) local_first = 0;
+         else local_first = prime - (local_low_value % prime);
       }
       for (i = local_first; i < local_prime_size; i += prime) local_prime_marked[i] = 1;
       if (!id) {
