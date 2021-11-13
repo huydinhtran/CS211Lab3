@@ -68,22 +68,26 @@ int main (int argc, char *argv[])
       exit(1);
    }
 /////////////////////////////////////////////////////////////////////////////////////////// 
-   int sqrt_n = sqrt(n); 
    local_prime_marked = (char*)calloc(sqrt_n + 1, 1);
-   local_prime_size = 0;
+   local_prime_size = sqrt(n);
    local_first = 0;
-   for (i = 2; i <= sqrt_n; i += 2){
+   for (i = 2; i <= local_prime_size; i += 2){
       local_prime_marked[i] = 1;
    } 
-
-   for (prime = 3; prime <= sqrt_n; prime += 2){
-      if (local_prime_marked[prime] == 1) 
-         continue;      
-      
-      for (i = prime << 1; i <= sqrt_n; i += prime){
-      local_prime_marked[i] = 1;
+   do {
+      if (prime * prime > low_value)
+         local_first = (prime * prime - low_value)/2;
+      else {         
+         if (!(low_value % prime)) local_first = 0;                  
+         else if ((low_value % prime)%2 == 1) local_first = (prime - (low_value % prime))/2;     
+         else local_first =  (2*prime - (low_value % prime))/2;
       }
-   } 
+      for (i = local_first; i < local_prime_size; i += prime) marked[i] = 1;
+      if (!id) {
+         while (marked[++index]);
+         prime = index*2 + 3;
+      }
+   } while (prime * prime <= local_prime_size);
 ///////////////////////////////////////////////////////////////////////////////////////////
    marked = (char *) malloc(size);
 
