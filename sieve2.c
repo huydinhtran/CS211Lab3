@@ -70,7 +70,7 @@ int main (int argc, char *argv[])
 /////////////////////////////Sieve2////////////////////////////////////////////////////////////// 
    unsigned long long int local_low_value = 2 + id * sqrt(n - 1) / p;
    local_prime_size = sqrt(n);
-   local_prime_marked = (char*)malloc(local_prime_size);
+   local_prime_marked = (char*)calloc(local_prime_size +1,1);
    local_first = 0;
    index = 0;
    prime = 2;
