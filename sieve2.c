@@ -58,6 +58,7 @@ int main (int argc, char *argv[])
    low_value  = 2 * low_index + 3;
    high_value = 2 * high_index + 3;
    size = (high_value - low_value)/2 + 1;
+   
 
    proc0_size = (n - 1) / p;
 
@@ -66,20 +67,24 @@ int main (int argc, char *argv[])
       MPI_Finalize();
       exit(1);
    }
-  
-   int sqrt_n = sqrt(n);
+/////////////////////////////////////////////////////////////////////////////////////////// 
+   int sqrt_n = sqrt(n); 
    local_prime_marked = (char*)calloc(sqrt_n + 1, 1);
+   local_prime_size = 0;
+   local_first = 0;
    for (i = 2; i <= sqrt_n; i += 2){
       local_prime_marked[i] = 1;
    } 
 
    for (prime = 3; prime <= sqrt_n; prime += 2){
-      if (local_prime_marked[prime] == 1) continue;      
+      if (local_prime_marked[prime] == 1) 
+         continue;      
+      
       for (i = prime << 1; i <= sqrt_n; i += prime){
       local_prime_marked[i] = 1;
       }
-   }
-
+   } 
+///////////////////////////////////////////////////////////////////////////////////////////
    marked = (char *) malloc(size);
 
    if (marked == NULL) {
@@ -87,7 +92,6 @@ int main (int argc, char *argv[])
       MPI_Finalize();
       exit(1);
    }
- 
 
    for (i = 0; i < size; i++) marked[i] = 0;
    if (!id) index = 0;  
