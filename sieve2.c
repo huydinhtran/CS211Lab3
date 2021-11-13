@@ -71,6 +71,11 @@ int main (int argc, char *argv[])
    local_prime_size = sqrt(n);
    local_prime_marked = (char*)calloc(local_prime_size + 1, 1);
    local_first = 0;
+   index = 0;
+   prime = 3;
+
+   for (i = 0; i < local_prime_size; i++) local_prime_marked[i] = 0;
+
    for (i = 2; i <= local_prime_size; i += 2){
       local_prime_marked[i] = 1;
    } 
