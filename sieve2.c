@@ -107,7 +107,7 @@ int main (int argc, char *argv[])
       // if (!id) {
          while (local_prime_marked[++index]);
          prime = index * 2 + 3;
-      }
+      // }
    } while (prime * prime <= n);      
    count = 0;
    for (i = 0; i < size; i++)
