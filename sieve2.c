@@ -103,7 +103,7 @@ int main (int argc, char *argv[])
       }
       for (i = first; i < size; i += prime) marked[i] = 1;
       do {
-         prime+=2
+         prime+=2;
       } while(local_prime_marked[prime] && prime <=sqrt(n)); 
       prime = prime * prime + 3;
    } while (prime * prime <= n);      
