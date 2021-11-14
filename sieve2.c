@@ -82,7 +82,6 @@ int main (int argc, char *argv[])
          local_prime_marked[i] = 1;
       }
    } 
-
 /////////////////////////////Sieve1//////////////////////////////////////////////////////////////
    marked = (char *) malloc(size);
 
