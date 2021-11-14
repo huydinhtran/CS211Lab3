@@ -74,7 +74,7 @@ int main (int argc, char *argv[])
       local_prime_marked[i] = 1;
    } 
 
-   for (prime = 3; prime*prime<=sqrt(n); prime += 2){
+   for (prime = 3; prime*prime <= sqrt(n); prime += 2){
       if (local_prime_marked[prime] == 1)
          continue;
 
