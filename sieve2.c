@@ -67,7 +67,7 @@ int main (int argc, char *argv[])
       MPI_Finalize();
       exit(1);
    }
-/////////////////////////////Sieve2////////////////////////////////////////////////////////////// 
+/////////////////////////////Sieve2/////////////////////////////////////////////////////////// 
    local_prime_marked = (char*)malloc(sqrt(n)+1);
 
    for (i = 2; i <= sqrt(n); i += prime){
@@ -82,7 +82,7 @@ int main (int argc, char *argv[])
          local_prime_marked[i] = 1;
       }
    } 
-/////////////////////////////Sieve1//////////////////////////////////////////////////////////////
+/////////////////////////////Sieve1///////////////////////////////////////////////////////////
    marked = (char *) malloc(size);
 
    if (marked == NULL) {
@@ -92,7 +92,6 @@ int main (int argc, char *argv[])
    }
 
    for (i = 0; i < size; i++) marked[i] = 0;
-   // if (!id) 
    index = 0;  
    prime = 3;
    do {
@@ -104,10 +103,8 @@ int main (int argc, char *argv[])
          else first =  (2*prime - (low_value % prime))/2;
       }
       for (i = first; i < size; i += prime) marked[i] = 1;
-      // if (!id) {
-         while (local_prime_marked[++index]);
-         prime = index * 2 + 3;
-      // }
+      while (local_prime_marked[++index]);
+      prime = index * 2 + 3;
    } while (prime * prime <= n);      
    count = 0;
    for (i = 0; i < size; i++)
