@@ -105,7 +105,7 @@ int main (int argc, char *argv[])
       for (i = first; i < size; i += prime) marked[i] = 1;
       if (!id) {
          while (local_prime_marked[++index]);
-         prime = index*2 + 3;
+         prime = index * 2 + 3;
       }
       // if (p > 1) MPI_Bcast(&prime, 1, MPI_INT, 0, MPI_COMM_WORLD);
    } while (prime * prime <= n);
