@@ -92,7 +92,7 @@ int main (int argc, char *argv[])
    }
 
    for (i = 0; i < size; i++) marked[i] = 0;
-   if (!id) index = 0;  
+   index = 0;  
    prime = 3;
    do {
       if (prime * prime > low_value)
