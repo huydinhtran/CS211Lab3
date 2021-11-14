@@ -60,13 +60,13 @@ int main (int argc, char *argv[])
    size = (high_value - low_value)/2 + 1;
    
 
-//    proc0_size = (n - 1) / p;
+   proc0_size = (n - 1) / p;
 
-//    if (high_value < (int) sqrt((double) n)) {
-//       if (!id) printf("Too many processes\n");
-//       MPI_Finalize();
-//       exit(1);
-//    }
+   if (high_value < (int) sqrt((double) n)) {
+      if (!id) printf("Too many processes\n");
+      MPI_Finalize();
+      exit(1);
+   }
 /////////////////////////////Sieve2/////////////////////////////////////////////////////////// 
 //    local_prime_marked = (char*)malloc(sqrt(n)+1);
 
