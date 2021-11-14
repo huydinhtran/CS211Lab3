@@ -70,18 +70,18 @@ int main (int argc, char *argv[])
 /////////////////////////////Sieve2/////////////////////////////////////////////////////////// 
    local_prime_marked = (char*)malloc(sqrt(n)+1);
 
-//    for (i = 2; i <= sqrt(n); i += prime){
-//       local_prime_marked[i] = 1;
-//    } 
+   for (i = 2; i <= sqrt(n); i += 2){
+      local_prime_marked[i] = 1;
+   } 
 
-//    for (prime = 3; prime*prime <= sqrt(n); prime += 2){
-//       if (local_prime_marked[prime] == 1)
-//          continue;
+   for (prime = 3; prime*prime <= sqrt(n); prime += 2){
+      if (local_prime_marked[prime] == 1)
+         continue;
 
-//       for (i = prime*prime; i <= sqrt(n); i += prime){
-//          local_prime_marked[i] = 1;
-//       }
-//    } 
+      for (i = prime*prime; i <= sqrt(n); i += prime){
+         local_prime_marked[i] = 1;
+      }
+   } 
 /////////////////////////////Sieve1///////////////////////////////////////////////////////////
 //    marked = (char *) malloc(size);
 
@@ -103,13 +103,12 @@ int main (int argc, char *argv[])
 //       }
 //       for (i = first; i < size; i += prime) marked[i] = 1;
 //       do {
-//          prime+=2;
-//       } while(local_prime_marked[prime] && prime <=sqrt(n)); 
+//          prime += 2;
+//       } while(local_prime_marked[prime] && prime <= sqrt(n)); 
 //    } while (prime * prime <= n);      
 //    count = 0;
 //    for (i = 0; i < size; i++)
 //       if (!marked[i]) count++;
-   
 //    if (p > 1)
 //       MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
 
