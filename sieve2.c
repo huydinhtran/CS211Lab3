@@ -83,35 +83,35 @@ int main (int argc, char *argv[])
       }
    } 
 /////////////////////////////Sieve1///////////////////////////////////////////////////////////
-   marked = (char *) malloc(size);
+//    marked = (char *) malloc(size);
 
-   if (marked == NULL) {
-      printf("Cannot allocate enough memory\n");
-      MPI_Finalize();
-      exit(1);
-   }
+//    if (marked == NULL) {
+//       printf("Cannot allocate enough memory\n");
+//       MPI_Finalize();
+//       exit(1);
+//    }
 
-   for (i = 0; i < size; i++) marked[i] = 0;
-   prime = 3;
-   do {
-      if (prime * prime > low_value)
-         first = (prime * prime - low_value)/2;
-      else {         
-         if (!(low_value % prime)) first = 0;                  
-         else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
-         else first =  (2*prime - (low_value % prime))/2;
-      }
-      for (i = first; i < size; i += prime) marked[i] = 1;
-      do {
-         prime+=2;
-      } while(local_prime_marked[prime] && prime <=sqrt(n)); 
-   } while (prime * prime <= n);      
-   count = 0;
-   for (i = 0; i < size; i++)
-      if (!marked[i]) count++;
+//    for (i = 0; i < size; i++) marked[i] = 0;
+//    prime = 3;
+//    do {
+//       if (prime * prime > low_value)
+//          first = (prime * prime - low_value)/2;
+//       else {         
+//          if (!(low_value % prime)) first = 0;                  
+//          else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
+//          else first =  (2*prime - (low_value % prime))/2;
+//       }
+//       for (i = first; i < size; i += prime) marked[i] = 1;
+//       do {
+//          prime+=2;
+//       } while(local_prime_marked[prime] && prime <=sqrt(n)); 
+//    } while (prime * prime <= n);      
+//    count = 0;
+//    for (i = 0; i < size; i++)
+//       if (!marked[i]) count++;
    
-   if (p > 1)
-      MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+//    if (p > 1)
+//       MPI_Reduce(&count, &global_count, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
 
    /* Stop the timer */
 
