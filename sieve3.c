@@ -147,7 +147,7 @@ int main (int argc, char *argv[])
       
 //       block_low_value += num_per_block * 2;
 //       block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
-//    } 
+   } 
 //////////////////////////////////////////////////////////////////////////////
    count = 0;
    for (i = 0; i < size; i++)
