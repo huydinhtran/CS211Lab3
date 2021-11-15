@@ -133,12 +133,12 @@ int main (int argc, char *argv[])
          * optimization - consider only odd multiples 
          *                of the prime number
          */
-//          if ((first + prime) & 1) // is odd 
-//             first += prime;
+         if ((first + prime) & 1) // is odd 
+            first += prime;
 
-//          first_value_index = (first - 3) / 2 - low_value;
-//          prime_doubled     = prime << 1;
-//          prime_step        = prime_doubled / 2;
+         first_value_index = (first - 3) / 2 - low_value;
+         prime_doubled     = prime << 1;
+         prime_step        = prime_doubled / 2;
 //          for (i = first; i <= high_value; i += prime_doubled)   {
 //             marked[first_value_index] = 1;
 //             first_value_index += prime_step;
