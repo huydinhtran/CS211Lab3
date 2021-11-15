@@ -83,7 +83,7 @@ int main (int argc, char *argv[])
          local_prime_marked[i] = 1;
       }
    } 
-/////////////////////////////Sieve1///////////////////////////////////////////////////////////
+/////////////////////////////Sieve3///////////////////////////////////////////////////////////
    marked = (char *) malloc(size * sizeof(char));
 
    if (marked == NULL) {
@@ -91,23 +91,7 @@ int main (int argc, char *argv[])
       MPI_Finalize();
       exit(1);
    }
-
-   // for (i = 0; i < size; i++) marked[i] = 0;
-   // prime = 3;
-   // do {
-   //    if (prime * prime > low_value)
-   //       first = (prime * prime - low_value)/2;
-   //    else {         
-   //       if (!(low_value % prime)) first = 0;                  
-   //       else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
-   //       else first =  (2*prime - (low_value % prime))/2;
-   //    }
-   //    for (i = first; i < size; i += prime) marked[i] = 1;
-   //    do {
-   //       prime += 2;
-   //    } while(local_prime_marked[prime] && prime <= sqrt(n)); 
-   // } while (prime * prime <= n);   
-//////////////////////////////////////////////////////////////////////////////
+        
    int num_per_block    = 1024 * 1024;
    unsigned long long int block_low_value  = low_value;
    unsigned long long int block_high_value = MIN(high_value, low_value + num_per_block * 2);
@@ -131,11 +115,8 @@ int main (int argc, char *argv[])
             }
          }
       
-         /*
-         * optimization - consider only odd multiples 
-         *                of the prime number
-         */
-         if ((first + prime) & 1) // is odd 
+
+         if ((first + prime) & 1)  
             first += prime;
 
          first_value_index = (first - 3) / 2 - ((id) * (n-1) / (p) / 2);
@@ -150,7 +131,7 @@ int main (int argc, char *argv[])
       block_low_value += num_per_block * 2;
       block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
    } 
-//////////////////////////////////////////////////////////////////////////////
+
    count = 0;
    for (i = 0; i < size; i++)
       if (!marked[i]) count++;
