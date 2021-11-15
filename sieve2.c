@@ -124,8 +124,8 @@ int main (int argc, char *argv[])
    /* Print the results */
 
    if (!id) {
+      global_count += 1;
       printf("The total number of prime: %ld, total time: %10.6f, total node %d\n", global_count, elapsed_time, p);
-
    }
    MPI_Finalize ();
    return 0;
