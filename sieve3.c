@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MIN(a,b)  ((a)<(b)?(a):(b))
-#define BLOCK_LOW(id, p, n) \
-        ((id) * (n) / (p) / 2)
 
 int main (int argc, char *argv[])
 {
@@ -75,15 +73,15 @@ int main (int argc, char *argv[])
       local_prime_marked[i] = 1;
    } 
 
-   for (prime = 3; prime <= sqrt(n); prime += 2){
+   for (prime = 3; prime*prime <= sqrt(n); prime += 2){
       if (local_prime_marked[prime] == 1)
          continue;
 
-      for (i = prime << 1; i <= sqrt(n); i += prime){
+      for (i = prime*prime; i <= sqrt(n); i += prime){
          local_prime_marked[i] = 1;
       }
    } 
-/////////////////////////////Sieve3///////////////////////////////////////////////////////////
+/////////////////////////////Sieve1///////////////////////////////////////////////////////////
    marked = (char *) malloc(size * sizeof(char));
 
    if (marked == NULL) {
@@ -91,46 +89,32 @@ int main (int argc, char *argv[])
       MPI_Finalize();
       exit(1);
    }
-        
+
    int num_per_block    = 1024 * 1024;
    unsigned long long int block_low_value  = low_value;
    unsigned long long int block_high_value = MIN(high_value, low_value + num_per_block * 2);
    unsigned long long int first_value_index;
    unsigned long long int prime_doubled;
    unsigned long long int prime_step;
+
    for (i = 0; i < size; i++) marked[i] = 0;
+   prime = 3;
+   
    for (i = 0; i < size; i += num_per_block){
-      for (prime = 3; prime <= sqrt(n); prime++){
-         if (local_prime_marked[prime] == 1)               
-            continue;
-         if (prime * prime > block_low_value){
-            first = prime * prime;
+      do {
+         if (prime * prime > low_value)
+            first = (prime * prime - low_value)/2;
+         else {         
+            if (!(low_value % prime)) first = 0;                  
+            else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
+            else first =  (2*prime - (low_value % prime))/2;
          }
-         else{
-            if (!(block_low_value % prime))    {
-               first = block_low_value;
-            }
-            else{
-            first = prime - (block_low_value % prime) + block_low_value;
-            }
-         }
-      
-
-         if ((first + prime) & 1)  
-            first += prime;
-
-         first_value_index = (first - 3) / 2 - ((id) * (n-1) / (p) / 2);
-         prime_doubled     = prime << 1;
-         prime_step        = prime_doubled / 2;
-         for (i = first; i <= high_value; i += prime_doubled)   {
-            marked[first_value_index] = 1;
-            first_value_index += prime_step;
-         } 
-      }
-      
-      block_low_value += num_per_block * 2;
-      block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
-   } 
+         for (i = first; i <= high_value; i += prime*prime) marked[i] = 1;
+         do {
+            prime += 2;
+         } while(local_prime_marked[prime] && prime <= sqrt(n)); 
+      } while (prime * prime <= n);   
+   }
 
    count = 0;
    for (i = 0; i < size; i++)
