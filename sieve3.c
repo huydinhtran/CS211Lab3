@@ -113,7 +113,7 @@ int main (int argc, char *argv[])
    unsigned long long int prime_doubled;
    unsigned long long int prime_step;
    for (i = 0; i < size; i += num_per_block){
-      for (prime = 3; prime <= sqrt_n; prime++){
+      for (prime = 3; prime <= sqrt(n); prime++){
          if (local_prime_marked[prime] == 1)               
             continue;
          if (prime * prime > block_low_value){
