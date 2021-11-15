@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MIN(a,b)  ((a)<(b)?(a):(b))
+#define BLOCK_LOW(id, p, n) \
+        ((id) * (n) / (p) / 2)
 
 int main (int argc, char *argv[])
 {
@@ -136,7 +138,7 @@ int main (int argc, char *argv[])
          if ((first + prime) & 1) // is odd 
             first += prime;
 
-         first_value_index = (first - 3) / 2 - low_value;
+         first_value_index = (first - 3) / 2 - BLOCK_LOW(id, p, n - 1);
          prime_doubled     = prime << 1;
          prime_step        = prime_doubled / 2;
          for (i = first; i <= high_value; i += prime_doubled)   {
