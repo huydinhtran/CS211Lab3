@@ -138,7 +138,7 @@ int main (int argc, char *argv[])
          if ((first + prime) & 1) // is odd 
             first += prime;
 
-         first_value_index = (first - 3) / 2 - BLOCK_LOW(id, p, n - 1);
+         first_value_index = (first - 3) / 2 - ((id) * (n-1) / (p) / 2);
          prime_doubled     = prime << 1;
          prime_step        = prime_doubled / 2;
          for (i = first; i <= high_value; i += prime_doubled)   {
