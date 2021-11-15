@@ -139,10 +139,10 @@ int main (int argc, char *argv[])
          first_value_index = (first - 3) / 2 - low_value;
          prime_doubled     = prime << 1;
          prime_step        = prime_doubled / 2;
-//          for (i = first; i <= high_value; i += prime_doubled)   {
-//             marked[first_value_index] = 1;
-//             first_value_index += prime_step;
-//          } 
+         for (i = first; i <= high_value; i += prime_doubled)   {
+            marked[first_value_index] = 1;
+            first_value_index += prime_step;
+         } 
       }
       
       block_low_value += num_per_block * 2;
