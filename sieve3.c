@@ -133,21 +133,21 @@ int main (int argc, char *argv[])
          * optimization - consider only odd multiples 
          *                of the prime number
          */
-         if ((first + prime) & 1) // is odd 
-            first += prime;
+//          if ((first + prime) & 1) // is odd 
+//             first += prime;
 
-         first_value_index = (first - 3) / 2 - low_value;
-         prime_doubled     = prime << 1;
-         prime_step        = prime_doubled / 2;
-         for (i = first; i <= high_value; i += prime_doubled)   {
-            marked[first_value_index] = 1;
-            first_value_index += prime_step;
-         } 
-      }
+//          first_value_index = (first - 3) / 2 - low_value;
+//          prime_doubled     = prime << 1;
+//          prime_step        = prime_doubled / 2;
+//          for (i = first; i <= high_value; i += prime_doubled)   {
+//             marked[first_value_index] = 1;
+//             first_value_index += prime_step;
+//          } 
+//       }
       
-      block_low_value += num_per_block * 2;
-      block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
-   } 
+//       block_low_value += num_per_block * 2;
+//       block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
+//    } 
 //////////////////////////////////////////////////////////////////////////////
    count = 0;
    for (i = 0; i < size; i++)
