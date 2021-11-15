@@ -106,33 +106,33 @@ int main (int argc, char *argv[])
    //    } while(local_prime_marked[prime] && prime <= sqrt(n)); 
    // } while (prime * prime <= n);   
 //////////////////////////////////////////////////////////////////////////////
-   int num_per_block    = 1024 * 1024;
-   unsigned long long int block_low_value  = low_value;
-   unsigned long long int block_high_value = MIN(high_value, low_value + num_per_block * 2);
-   unsigned long long int first_value_index;
-   unsigned long long int prime_doubled;
-   unsigned long long int prime_step;
-   for (i = 0; i < size; i++) marked[i] = 0;
-   for (i = 0; i < size; i += num_per_block){
-      for (prime = 3; prime <= sqrt(n); prime++){
-         if (local_prime_marked[prime] == 1)               
-            continue;
-         if (prime * prime > block_low_value){
-            first = prime * prime;
-         }
-         else{
-            if (!(block_low_value % prime))    {
-               first = block_low_value;
-            }
-            else{
-            first = prime - (block_low_value % prime) + block_low_value;
-            }
-         }
+//    int num_per_block    = 1024 * 1024;
+//    unsigned long long int block_low_value  = low_value;
+//    unsigned long long int block_high_value = MIN(high_value, low_value + num_per_block * 2);
+//    unsigned long long int first_value_index;
+//    unsigned long long int prime_doubled;
+//    unsigned long long int prime_step;
+//    for (i = 0; i < size; i++) marked[i] = 0;
+//    for (i = 0; i < size; i += num_per_block){
+//       for (prime = 3; prime <= sqrt(n); prime++){
+//          if (local_prime_marked[prime] == 1)               
+//             continue;
+//          if (prime * prime > block_low_value){
+//             first = prime * prime;
+//          }
+//          else{
+//             if (!(block_low_value % prime))    {
+//                first = block_low_value;
+//             }
+//             else{
+//             first = prime - (block_low_value % prime) + block_low_value;
+//             }
+//          }
       
-         /*
-         * optimization - consider only odd multiples 
-         *                of the prime number
-         */
+//          /*
+//          * optimization - consider only odd multiples 
+//          *                of the prime number
+//          */
 //          if ((first + prime) & 1) // is odd 
 //             first += prime;
 
@@ -147,7 +147,7 @@ int main (int argc, char *argv[])
       
 //       block_low_value += num_per_block * 2;
 //       block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
-   } 
+//    } 
 //////////////////////////////////////////////////////////////////////////////
    count = 0;
    for (i = 0; i < size; i++)
