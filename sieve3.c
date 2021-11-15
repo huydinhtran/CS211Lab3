@@ -82,7 +82,7 @@ int main (int argc, char *argv[])
       }
    } 
 /////////////////////////////Sieve1///////////////////////////////////////////////////////////
-   marked = (char *) malloc(size * sizeof(char), 1);
+   marked = (char *) malloc(size * sizeof(char));
 
    if (marked == NULL) {
       printf("Cannot allocate enough memory\n");
