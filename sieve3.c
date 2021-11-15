@@ -109,10 +109,10 @@ int main (int argc, char *argv[])
             else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
             else first =  (2*prime - (low_value % prime))/2;
          }
-         for (i = first; i <= high_value; i += prime*prime) marked[i] = 1;
-         do {
-            prime += 2;
-         } while(local_prime_marked[prime] && prime <= sqrt(n)); 
+//          for (i = first; i <= high_value; i += prime*prime) marked[i] = 1;
+//          do {
+//             prime += 2;
+//          } while(local_prime_marked[prime] && prime <= sqrt(n)); 
       } while (prime * prime <= n);   
    }
 
