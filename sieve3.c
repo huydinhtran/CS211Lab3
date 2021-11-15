@@ -100,7 +100,7 @@ int main (int argc, char *argv[])
    for (i = 0; i < size; i++) marked[i] = 0;
    prime = 3;
    
-   for (i = 0; i < size; i += num_per_block){
+   for (i = 0; i < sqrt(n); i += num_per_block){
       do {
          if (prime * prime > low_value)
             first = (prime * prime - low_value)/2;
@@ -113,7 +113,6 @@ int main (int argc, char *argv[])
          do {
             prime += 2;
          } while(local_prime_marked[prime] && prime <= sqrt(n)); 
-         if (prime * prime <= n) continue;
       } while (prime * prime <= n);   
    }
 
