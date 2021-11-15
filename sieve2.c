@@ -69,7 +69,11 @@ int main (int argc, char *argv[])
    }
 /////////////////////////////Sieve2/////////////////////////////////////////////////////////// 
    local_prime_marked = (char*)malloc(sqrt(n)+1);
-
+   
+   for (i = 0; i <= sqrt(n); i++){
+      local_prime_marked[i] = 0;
+   } 
+   
    for (i = 2; i <= sqrt(n); i += 2){
       local_prime_marked[i] = 1;
    } 
