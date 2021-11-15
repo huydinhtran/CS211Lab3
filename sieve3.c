@@ -113,6 +113,7 @@ int main (int argc, char *argv[])
          do {
             prime += 2;
          } while(local_prime_marked[prime] && prime <= sqrt(n)); 
+         if (prime * prime <= n) continue;
       } while (prime * prime <= n);   
    }
 
