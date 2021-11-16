@@ -73,11 +73,11 @@ int main (int argc, char *argv[])
       local_prime_marked[i] = 1;
    } 
 
-   for (prime = 3; prime <= sqrt(n); prime += 2){
+   for (prime = 3; prime*prime <= sqrt(n); prime += 2){
       if (local_prime_marked[prime] == 1)
          continue;
 
-      for (i = prime; i <= sqrt(n); i += prime){
+      for (i = prime*prime; i <= sqrt(n); i += prime){
          local_prime_marked[i] = 1;
       }
    } 
@@ -106,7 +106,7 @@ int main (int argc, char *argv[])
             else if ((block_low_value % prime)%2 == 1) first = (prime - (block_low_value % prime))/2;     
             else first =  (2*prime - (block_low_value % prime))/2;
          }
-         for (i = first; i < size; i += prime) marked[i] = 1;
+         for (i = first; i < high_value; i += prime) marked[i] = 1;
          do {
             prime += 2;
          } while(local_prime_marked[prime] && prime <= size); 
