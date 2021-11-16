@@ -81,7 +81,7 @@ int main (int argc, char *argv[])
          local_prime_marked[i] = 1;
       }
    } 
-/////////////////////////////Sieve1///////////////////////////////////////////////////////////
+/////////////////////////////Sieve3///////////////////////////////////////////////////////////
    marked = (char *) malloc(size * sizeof(char));
 
    if (marked == NULL) {
@@ -109,11 +109,11 @@ int main (int argc, char *argv[])
             else if ((block_low_value % prime)%2 == 1) first = (prime - (block_low_value % prime))/2;     
             else first =  (2*prime - (block_low_value % prime))/2;
          }
-         for (i = first; i <= high_value; i += prime) marked[i] = 1;
+         for (i = first; i < size; i += prime) marked[i] = 1;
          do {
             prime += 2;
-         } while(local_prime_marked[prime] && prime <= high_value); 
-      } while (prime * prime <= high_value); 
+         } while(local_prime_marked[prime] && prime <= size); 
+      } while (prime * prime < size); 
       block_low_value += num_per_block * 2;
       block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
    }
