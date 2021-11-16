@@ -9,7 +9,7 @@ int main (int argc, char *argv[])
    unsigned long int      count;             /* Local prime count */
    double                 elapsed_time;      /* Parallel execution time */
    unsigned long int      first;             /* Index of first multiple */
-   int                    local_first;
+   int                    local_first;       
    unsigned long int      global_count = 0;  /* Global prime count */
    unsigned long long int high_value;        /* Highest value on this proc */
    unsigned long int      i;
@@ -24,7 +24,7 @@ int main (int argc, char *argv[])
    unsigned long int      prime;
    unsigned long int      local_prime;       /* Current prime */
    unsigned long int      size;              /* Elements in 'marked' */
-   unsigned long int      local_prime_size;
+   unsigned long int      local_prime_size;  
 
 
    MPI_Init (&argc, &argv);
@@ -47,6 +47,11 @@ int main (int argc, char *argv[])
    /* Figure out this process's share of the array, as
       well as the integers represented by the first and
       last array elements */
+
+   /* Add you code here  */
+   /* Figure out this process's share of the array, as
+      well as the integers represented by the first and
+      last array elements */   
    unsigned long long int m = (n-1)/2;
    unsigned long long int low_index  = id * m / p;
    unsigned long long int high_index = (id+1) * m / p - 1;
@@ -81,8 +86,8 @@ int main (int argc, char *argv[])
          local_prime_marked[i] = 1;
       }
    } 
-/////////////////////////////Sieve3///////////////////////////////////////////////////////////
-   marked = (char *) malloc(size * sizeof(char));
+/////////////////////////////Sieve1///////////////////////////////////////////////////////////
+   marked = (char *) malloc(size);
 
    if (marked == NULL) {
       printf("Cannot allocate enough memory\n");
@@ -90,31 +95,21 @@ int main (int argc, char *argv[])
       exit(1);
    }
 
-   int block_num    = 1024 * 1024;
-   unsigned long long int block_low_value  = low_value;
-   unsigned long long int block_high_value = MIN(high_value, low_value + block_num * 2);
-
    for (i = 0; i < size; i++) marked[i] = 0;
    prime = 3;
-   
-   for (i = 0; i < size; i += block_num){
+   do {
+      if (prime * prime > low_value)
+         first = (prime * prime - low_value)/2;
+      else {         
+         if (!(low_value % prime)) first = 0;                  
+         else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
+         else first =  (2*prime - (low_value % prime))/2;
+      }
+      for (i = first; i < size; i += prime) marked[i] = 1;
       do {
-         if (prime * prime > block_low_value)
-            first = (prime * prime - block_low_value)/2;
-         else {         
-            if (!(block_low_value % prime)) first = 0;                  
-            else if ((block_low_value % prime)%2 == 1) first = (prime - (block_low_value % prime))/2;     
-            else first =  (2*prime - (block_low_value % prime))/2;
-         }
-         for (i = first; i < size; i += prime) marked[i] = 1;
-         do {
-            prime += 2;
-         } while(local_prime_marked[prime] && prime <= sqrt(n)); 
-      } while (prime * prime <= n); 
-      block_low_value += block_num * 2;
-      block_high_value = MIN(high_value, block_high_value + block_num * 2); 
-   }
-
+         prime += 2;
+      } while(local_prime_marked[prime] && prime <= sqrt(n)); 
+   } while (prime * prime <= n);      
    count = 0;
    for (i = 0; i < size; i++)
       if (!marked[i]) count++;
@@ -124,6 +119,7 @@ int main (int argc, char *argv[])
    /* Stop the timer */
 
    elapsed_time += MPI_Wtime();
+
 
    /* Print the results */
 
