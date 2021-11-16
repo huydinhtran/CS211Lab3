@@ -92,7 +92,7 @@ int main (int argc, char *argv[])
 
    int block_num    = 1024 * 1024;
    unsigned long long int block_low_value  = low_value;
-   unsigned long long int block_high_value = MIN(high_value, low_value + num_per_block * 2);
+   unsigned long long int block_high_value = MIN(high_value, low_value + block_num * 2);
 
    for (i = 0; i < size; i++) marked[i] = 0;
    prime = 3;
