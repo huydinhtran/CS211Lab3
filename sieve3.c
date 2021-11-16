@@ -102,12 +102,12 @@ int main (int argc, char *argv[])
    
    for (i = 0; i < size; i += num_per_block){
       do {
-         if (prime * prime > low_value)
-            first = (prime * prime - low_value)/2;
+         if (prime * prime > block_low_value)
+            first = (prime * prime - block_low_value)/2;
          else {         
-            if (!(low_value % prime)) first = 0;                  
-            else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
-            else first =  (2*prime - (low_value % prime))/2;
+            if (!(block_low_value % prime)) first = 0;                  
+            else if ((block_low_value % prime)%2 == 1) first = (prime - (block_low_value % prime))/2;     
+            else first =  (2*prime - (block_low_value % prime))/2;
          }
          for (i = first; i <= high_value; i += prime) marked[i] = 1;
          do {
