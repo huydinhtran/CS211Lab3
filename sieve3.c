@@ -112,7 +112,7 @@ int main (int argc, char *argv[])
          } while(local_prime_marked[prime] && prime <= size); 
       } while (prime * prime < size); 
       block_low_value += block_num * 2;
-      block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
+      block_high_value = MIN(high_value, block_high_value + block_num * 2); 
    }
 
    count = 0;
