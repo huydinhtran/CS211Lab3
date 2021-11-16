@@ -97,7 +97,7 @@ int main (int argc, char *argv[])
    for (i = 0; i < size; i++) marked[i] = 0;
    prime = 3;
    
-   for (i = 0; i < size; i += num_per_block){
+   for (i = 0; i < size; i += block_num){
       do {
          if (prime * prime > block_low_value)
             first = (prime * prime - block_low_value)/2;
