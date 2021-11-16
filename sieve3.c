@@ -93,9 +93,9 @@ int main (int argc, char *argv[])
    int num_per_block    = 1024 * 1024;
    unsigned long long int block_low_value  = low_value;
    unsigned long long int block_high_value = MIN(high_value, low_value + num_per_block * 2);
-   unsigned long long int first_value_index;
-   unsigned long long int prime_doubled;
-   unsigned long long int prime_step;
+//    unsigned long long int first_value_index;
+//    unsigned long long int prime_doubled;
+//    unsigned long long int prime_step;
 
    for (i = 0; i < size; i++) marked[i] = 0;
    prime = 3;
@@ -109,11 +109,11 @@ int main (int argc, char *argv[])
             else if ((low_value % prime)%2 == 1) first = (prime - (low_value % prime))/2;     
             else first =  (2*prime - (low_value % prime))/2;
          }
-         for (i = first; i < block_high_value; i += prime) marked[i] = 1;
+         for (i = first; i <= high_value; i += prime) marked[i] = 1;
          do {
             prime += 2;
-         } while(local_prime_marked[prime] && prime <= block_high_value); 
-      } while (prime * prime <= block_high_value); 
+         } while(local_prime_marked[prime] && prime <= high_value); 
+      } while (prime * prime <= high_value); 
       block_low_value += num_per_block * 2;
       block_high_value = MIN(high_value, block_high_value + num_per_block * 2); 
    }
